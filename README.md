@@ -1,1 +1,1 @@
-# filipslavic.github.io
+# Repozitorij projekta Filipa Slavića i Laure Perić
