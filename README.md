@@ -1,1 +1,1 @@
-# Repozitorij projekta Filipa Slavića i Laure Perić
+# Repozitorij projekta Filip Slavića i Laure Perić
