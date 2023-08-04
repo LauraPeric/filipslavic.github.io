@@ -1,82 +1,95 @@
 <template>
-<section class="vh-100 bg-image"
-  style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
-  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-    <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-          <div class="card" style="border-radius: 15px;">
-            <div class="card-body p-5">
-              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
-
-              <form>
-
-                <div class="form-outline mb-4">
-                  <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example1cg">Your Name</label>
-                </div>
-
-                <div class="form-outline mb-4">
-                  <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example3cg">Your Email</label>
-                </div>
-
-                <div class="form-outline mb-4">
-                  <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example4cg">Password</label>
-                </div>
-
-                <div class="form-outline mb-4">
-                  <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
-                  <label class="form-label" for="form3Example4cdg">Repeat your password</label>
-                </div>
-
-                <div class="form-check d-flex justify-content-center mb-5">
-                  <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
-                  <label class="form-check-label" for="form2Example3g">
-                    I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
-                  </label>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                  <button type="button"
-                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
-                </div>
-
-                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!"
-                    class="fw-bold text-body"><u>Login here</u></a></p>
-
-              </form>
-
-            </div>
-          </div>
+  <div class="registration-page">
+    <div class="registration-form">
+      <h2 class="registration-title">Registriraj se</h2>
+      <form @submit.prevent="registerUser">
+        <div class="form-group">
+          <label for="Korisnickoime">Korisničko ime</label>
+          <input
+            v-model="userData.Korisnickoime"
+            type="text"
+            id="Korisničko ime"
+            class="form-control"
+          />
         </div>
-      </div>
+        <div class="form-group">
+          <label for="email">Upišite email</label>
+          <input
+            v-model="userData.email"
+            type="email"
+            id="email"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="lozinka">Upišite lozinku</label>
+          <input
+            v-model="userData.password"
+            type="lozinka"
+            id="lozinka"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="potvrditelozinku">Potvrdite lozinku</label>
+          <input
+            v-model="userData.confirmPassword"
+            type="lozinka"
+            id="potvrditelozinku"
+            class="form-control"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+          Registriraj se
+        </button>
+      </form>
+      <router-link to="/" class="btn btn-primary">Nazad</router-link>
     </div>
   </div>
-  </section>
 </template>
 
-<style>
+<script>
+export default {
+  data() {
+    return {
+      userData: {
+        Korisnickoime: "",
+        email: "",
+        lozinka: "",
+        potvrditelozinku: "",
+      },
+    };
+  },
+  methods: {
+    registerUser() {
+      // logiku za registraciju korisnika
+      // Nakon uspješne registracije preusmjerite korisnika na početnu stranicu
+      this.$router.push({ name: "home" });
+    },
+  },
+};
+</script>
 
-.gradient-custom-3 {
-    /* fallback for old browsers */
-    background: #84fab0;
-    
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
-    }
-    .gradient-custom-4 {
-    /* fallback for old browsers */
-    background: #84fab0;
-    
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
-    }
+<style scoped>
+.registration-page {
+  background-color: #e1b8b8;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.registration-form {
+  background-color: #8e8e8e;
+  padding: 25px 100px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.268);
+  width: 1000px; /* Promijenjeno na 100% */
+  margin: 0 auto; /* Centriranje horizontalno */
+}
+
+.registration-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
 </style>
