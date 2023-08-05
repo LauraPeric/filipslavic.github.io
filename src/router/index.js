@@ -22,8 +22,26 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Signup.vue')
+  },
+  {
+    path: '/registracijaKiliA',
+    name: 'odabirregistracije',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/registracijaKiliA.vue')
+  },
+  {
+    path: '/info', // Dodajte novu rutu za komponentu info
+    name: 'Info',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Info.vue')
+  },
+  {
+    path: '/prijaviA',
+    name: 'prijaviA',
+    component: () => import(/* webpackChunkName: "about" */ '../views/PrijaviA.vue'),
   }
-]
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
