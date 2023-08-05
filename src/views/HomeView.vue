@@ -53,6 +53,7 @@ export default {
   justify-content: center;
   background-color: #e1b8b8;
   height: 100vh;
+  width: 100%;
 }
 
 .slider {

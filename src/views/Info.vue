@@ -71,6 +71,7 @@ export default {
 .information-page {
   background-color: #e1b8b8;
   padding: 50px;
+  width: 100%;
 }
 
 .information-title {
