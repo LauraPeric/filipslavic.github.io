@@ -32,7 +32,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/registracijaKiliA.vue')
   },
   {
-    path: '/info', // Dodajte novu rutu za komponentu info
+    path: '/info',
     name: 'Info',
     component: () => import(/* webpackChunkName: "about" */ '../views/Info.vue')
   },
