@@ -53,8 +53,8 @@ export default {
   },
   methods: {
     sendContactMessage() {
-      // Ovdje biste dodali logiku za slanje poruke
-      // Možete koristiti podatke iz this.ime, this.email, this.naslovPoruke, this.poruka
+      // logika za slanje poruke
+      // koristiti podatke iz this.ime, this.email, this.naslovPoruke, this.poruka
       console.log(
         "Poruka poslana:",
         this.ime,
