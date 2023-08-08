@@ -1,10 +1,15 @@
 <template>
   <div class="login-page">
+    <div class="page-title">
+      <h1>Prijavi se ovdje!</h1>
+    </div>
     <div class="login-container">
       <div class="login-form">
         <form>
           <div class="form-group">
-            <label for="loginemail">Upišite email adresu</label>
+            <label for="loginemail" class="input-email"
+              >Upišite email adresu</label
+            >
             <input
               type="email"
               class="form-control"
@@ -13,11 +18,13 @@
               placeholder="email"
             />
             <small id="emailHelp" class="form-text text-muted"
-              >We'll never share your email with anyone else.</small
+              >Nikada nećemo djeliti vaš email s terćim strankama.</small
             >
           </div>
           <div class="form-group">
-            <label for="loginlozinka">Upišite lozinku</label>
+            <label for="loginlozinka" class="input-email"
+              >Upišite lozinku</label
+            >
             <input
               type="password"
               class="form-control"
@@ -29,7 +36,9 @@
             <button type="submit" class="btn btn-primary">Prijavi se</button>
           </div>
           <div class="button-conatiner">
-            <router-link to="/" class="btn btn-primary">Nazad</router-link>
+            <router-link to="/registracijaKiliA" class="btn btn-primary"
+              >Nazad</router-link
+            >
           </div>
         </form>
       </div>
@@ -44,37 +53,47 @@ export default {
 </script>
 
 <style scoped>
+.form-group {
+  margin-bottom: 20px;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
 .login-page {
   background-color: #e1b8b8;
   min-height: 100vh;
-  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .login-container {
   background-color: #8e8e8e;
-  padding: 25px;
+  padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  width: 400px;
+  width: 50%;
+  height: 40%;
+  margin: 0 auto;
 }
 
 .login-form {
-  margin-top: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .form-group label {
-  color: white;
+  text-align: center;
+  color: rgb(7, 7, 7);
+  font-size: 19px;
   font-weight: bold;
-}
-
-.form-group input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
+  margin-bottom: 10px;
 }
 
 .button-container {
@@ -93,6 +112,11 @@ export default {
   background-color: purple;
   border: black;
   align-items: normal;
+  width: 100%;
+  cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
 }
 
 .btn-primary:hover {

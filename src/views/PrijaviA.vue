@@ -1,31 +1,34 @@
 <template>
   <div class="registration-container">
+    <div class="prijavia-naslov">
+      <h1>Prijavi se kao admin</h1>
+    </div>
     <div class="registration-box">
       <div class="sections-container">
         <div class="admin-section">
           <form @submit.prevent="loginAdmin" class="login-form">
             <div class="login-header">
-              <p>Upišite korisničko ime</p>
+              <p class="input-label">Upišite korisničko ime</p>
             </div>
             <div class="form-group">
-              <label for="Korisnickoime">Korisničko ime</label>
               <input
                 v-model="adminData.username"
                 type="text"
                 id="Korisničko ime"
                 class="form-control"
+                placeholder="vaše korisničko ime"
               />
             </div>
             <div class="login-header">
-              <p>Upišite lozinku</p>
+              <p class="input-label">Upišite lozinku</p>
             </div>
             <div class="form-group">
-              <label for="lozinka">Lozinka</label>
               <input
                 v-model="adminData.password"
                 type="password"
                 id="lozinka"
                 class="form-control"
+                placeholder="vaša lozinka"
               />
             </div>
             <div class="button-container">
@@ -70,16 +73,23 @@ export default {
   align-items: center;
   height: 100vh;
   width: 100%;
+  flex-direction: column;
   background-color: #e1b8b8;
+}
+
+.prijavia-naslov {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 .registration-box {
   background-color: #8e8e8e;
-  padding: 25px 30px;
+  padding: 20px;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.268);
-  width: 40%;
-  max-width: 400px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  width: 50%;
+  height: 40%;
   margin: 0 auto;
 }
 
@@ -95,11 +105,11 @@ export default {
 }
 
 .login-header {
-  text-align: left;
+  text-align: center;
   color: rgb(7, 7, 7);
-  font-size: 16px;
+  font-size: 19px;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .form-group label {

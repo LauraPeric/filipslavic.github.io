@@ -1,5 +1,6 @@
 <template>
   <div class="registration-page">
+    <h1 class="register-naslov">Registrirajte se ovdje!</h1>
     <div class="registration-form">
       <h2 class="registration-title">Registriraj se</h2>
       <form @submit.prevent="registerUser">
@@ -43,7 +44,9 @@
       </form>
     </div>
     <div class="button-container">
-      <router-link to="/" class="btn btn-primary btn-block">Nazad</router-link>
+      <router-link to="/registracijaKiliA" class="btn btn-primary btn-block"
+        >Nazad</router-link
+      >
     </div>
   </div>
 </template>
@@ -80,6 +83,9 @@ export default {
   justify-content: center;
   align-items: center;
 }
+.register-naslov {
+  margin-bottom: 20px;
+}
 
 .registration-form {
   background-color: #8e8e8e;
@@ -88,11 +94,13 @@ export default {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.268);
   width: 1000px;
   margin: 0 auto;
+  margin-top: 10px;
 }
 
 .registration-title {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 29px;
 }
 
 .btn-primary {
@@ -102,6 +110,7 @@ export default {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .btn-primary:hover {
