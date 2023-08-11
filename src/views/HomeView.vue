@@ -1,16 +1,27 @@
 <template>
   <div class="home-page">
+    <div class="side-menu">
+      <router-link to="/odabirtipak" class="menu-item">Tip kože</router-link>
+      <router-link to="/brend" class="menu-item">Brend</router-link>
+    </div>
     <div class="slider">
       <img :src="currentSlide" alt="Slide" />
+      <div class="prevnextslide"></div>
       <button @click="prevSlide" class="slider-button">Prethodna</button>
       <button @click="nextSlide" class="slider-button">Sljedeća</button>
     </div>
     <div class="text-container">
       <div class="text-box">
-        <p class="home-text">{{ homeText }}</p>
+        <p class="home-text">
+          Dobrodošli na stranicu Facial Care Me! Stranica Facial Care Me vam
+          omogućuje pregled proizvoda koji su najpovoljniji za njegu vašeg tipa
+          kože. Na stranici možete pretraživati brandove,ostavljati recenzije i
+          pisati u forume. Također vam je omogućeni pregled dostupnosti svih
+          navedenih proizvoda u najpoznatijim drogerijama DM, Bipa i Muller.
+        </p>
       </div>
-      <router-link to="/info" class="btn btn-primary">Informacije</router-link>
     </div>
+    <router-link to="/info" class="btn btn-primary">Informacije</router-link>
   </div>
 </template>
 
@@ -46,6 +57,24 @@ export default {
 </script>
 
 <style scoped>
+.side-menu {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #f9dada;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.menu-item {
+  margin-bottom: 10px;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
 .home-page {
   display: flex;
   flex-direction: column;
@@ -81,12 +110,12 @@ export default {
 
 .text-box {
   background-color: #8e8e8e;
-  padding: 20px;
+  padding: 25px 50px 75px 50px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 20px;
+  width: 50%;
+  height: 60%;
+  margin: 0 auto;
 }
 
 .home-text {
