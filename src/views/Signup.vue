@@ -1,46 +1,47 @@
+
 <template>
   <div class="registration-page">
     <h1 class="register-naslov">Registrirajte se ovdje!</h1>
     <div class="registration-form">
       <h2 class="registration-title">Registriraj se</h2>
-      <form @submit.prevent="registerUser">
+      <form @submit.prevent="register">
         <div class="form-group">
-          <label for="Korisnickoime">Korisničko ime</label>
+          <label for="email<">Upišite email</label>
           <input
-            v-model="userData.Korisnickoime"
-            type="text"
-            id="Korisničko ime"
-            class="form-control"
-          />
-        </div>
-        <div class="form-group">
-          <label for="email">Upišite email</label>
-          <input
-            v-model="userData.email"
+            v-model="username"
             type="email"
             id="email"
             class="form-control"
+            aria-describedby="emailhelp"
+            placeholder="upišite email"
+          />
+        </div>
+        <small id="emailhelp" class="form-text text-muted">
+          Nikada nećemo dijeliti vaš email s trećim strankama
+        </small>
+        <div class="form-group">
+          <label for="password">Upišite lozinku</label>
+          <input
+            v-model="password"
+            type="password"
+            id="password"
+            class="form-control"
+            placeholder="upišite lozinku"
           />
         </div>
         <div class="form-group">
-          <label for="lozinka">Upišite lozinku</label>
+          <label for="passwordrepeat">Potvrdite lozinku</label>
           <input
-            v-model="userData.password"
+            v-model="passwordrepeat"
             type="password"
-            id="lozinka"
+            id="passwordrepeat"
             class="form-control"
+            placeholder="ponovite lozinku"
           />
         </div>
-        <div class="form-group">
-          <label for="potvrditelozinku">Potvrdite lozinku</label>
-          <input
-            v-model="userData.confirmPassword"
-            type="password"
-            id="potvrditeelozinku"
-            class="form-control"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary">Registriraj se</button>
+        <button type="button" @click="signup" class="btn btn-primary">
+          Registriraj se
+        </button>
       </form>
     </div>
     <div class="button-container">
@@ -50,24 +51,30 @@
     </div>
   </div>
 </template>
-
 <script>
+import { firebase } from "@/firebase";
+
 export default {
+  name: "Signup",
   data() {
     return {
-      userData: {
-        Korisnickoime: "",
-        email: "",
-        lozinka: "",
-        potvrditelozinku: "",
-      },
+      username: "",
+      password: "",
+      passwordrepeat: "",
     };
   },
   methods: {
-    registerUser() {
-      // logika za registraciju korisnika
-      // Nakon uspješne registracije preusmjeriti korisnika na početnu stranicu
-      this.$router.push({ name: "home" });
+    signup() {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.username, this.password)
+        .then(() => {
+          console.log("Uspješna registracija");
+        })
+        .catch((error) => {
+          console.error("Došlo je do greške", error);
+        });
+      console.log("nastavak");
     },
   },
 };
@@ -76,8 +83,8 @@ export default {
 <style scoped>
 .registration-page {
   background-color: #e1b8b8;
-  min-height: 100vh;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
