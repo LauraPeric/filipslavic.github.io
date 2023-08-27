@@ -1,43 +1,38 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
-import brend from '../views/brend.vue';
-import brendlist from '../views/brendlist.vue';
+import store from '../store';
+
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
   },
-  { path: '/brend', component: brend },
-  { path: '/brandlist/:brendlist', name: 'brendlist', component: brendlist, props: true },
   {
     path: '/login',
     name: 'Login',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    component: () => import(/*webpackChunkName: "login"*/ '../views/Login.vue')
   },
   {
     path: '/signup',
     name: 'Signup',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Signup.vue')
+    component: () => import(/* webpackChunkName: "signup" */ '../views/Signup.vue')
   },
   {
     path: '/registracijaKiliA',
     name: 'odabirregistracije',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/registracijaKiliA.vue')
+    component: () => import(/* webpackChunkName: "registracijaKiliA" */ '../views/registracijaKiliA.vue')
   },
   {
-    path: '/info', // Dodajte novu rutu za komponentu info
+    path: '/info', // nova rutu za komponentu info
     name: 'Info',
+    meta: {
+      needsUser: true
+    },
     component: () => import(/* webpackChunkName: "about" */ '../views/Info.vue')
   },
   {
@@ -48,12 +43,18 @@ const routes = [
   {
     path: '/forum',
     name: 'Forum',
+    meta: {
+      needsUser: true
+    },
     component: () => import(/* webpackChunkName: "about" */ '../views/Forum.vue'),
   },
   {
     path: '/odabirtipak',
     name: 'Odabirtipak',
-    component: () => import(/* webpackChunkName: "about" */ '../views/odabirtipak.vue'),
+    meta: {
+      needsUser: true
+    },
+    component: () => import(/* webpackChunkName: "about" */ '../components/odabirtipak.vue'),
   },
   {
     path: '/masnakoza',
@@ -81,6 +82,26 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/DR.vue'),
   },
   {
+    path: '/serumigeloviM',
+    name: 'serumigeloviM',
+    component: () => import(/* webpackChunkName: "about" */ '../views/serumigeloviM.vue'),
+  },
+  {
+    path: '/MserumLBB',
+    name: 'MserumLBB',
+    component: () => import(/* webpackChunkName: "about" */ '../views/MserumLBB.vue'),
+  },
+  {
+    path: '/micelM',
+    name: 'micelM',
+    component: () => import(/* webpackChunkName: "about" */ '../views/micelM.vue'),
+  },
+  {
+    path: '/Ziaja',
+    name: 'Ziaja',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Ziaja.vue'),
+  },
+  {
     path: '/suhakoza',
     name: 'suhakoza',
     component: () => import(/* webpackChunkName: "about" */ '../views/suhakoza.vue'),
@@ -96,15 +117,57 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/LBB.vue'),
   },
   {
-    path: '/brend',
-    name: 'brend',
-    component: () => import(/* webpackChunkName: "about" */ '../views/brend.vue'),
+    path: '/kremazaliceS',
+    name: 'kremazaliceS',
+    component: () => import(/* webpackChunkName: "about" */ '../views/kremazaliceS.vue'),
+  },
+  {
+    path: '/Pure',
+    name: 'Pure',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Pure.vue'),
+  },
+  {
+    path: '/serumigeloviS',
+    name: 'serumigeloviS',
+    component: () => import(/* webpackChunkName: "about" */ '../views/serumigeloviS.vue'),
+  },
+  {
+    path: '/Ladria',
+    name: 'Ladria',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Ladria.vue'),
+  },
+  {
+    path: '/micelS',
+    name: 'micelS',
+    component: () => import(/* webpackChunkName: "about" */ '../views/micelS.vue'),
+  },
+  {
+    path: '/balea',
+    name: 'balea',
+    component: () => import(/* webpackChunkName: "about" */ '../views/balea.vue'),
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+  console.log("stara ruta", from.name, "-->", to.name, "korisnik", store.currentUser)
+
+  const noUser = store.currentUser === null;
+
+  if (noUser && to.meta.needsUser) {
+    next("Login");
+  }
+  else {
+    next();
+  }
+});
+
+/*
+DODATI ZA ADMINA NEKE STRANICE KOJE ON MOZE UREDITI
+)*/
+
+export default router;
