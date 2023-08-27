@@ -12,6 +12,7 @@
             >
             <input
               type="email"
+              v-model="username"
               class="form-control"
               id="loginemail"
               aria-describedby="emailHelp"
@@ -27,13 +28,16 @@
             >
             <input
               type="password"
+              v-model="password"
               class="form-control"
               id="loginlozinka"
-              placeholder="Lozinka"
+              placeholder="upišite lozinku"
             />
           </div>
           <div class="button-container">
-            <button type="submit" class="btn btn-primary">Prijavi se</button>
+            <button type="button" @click="login()" class="btn btn-primary">
+              Prijavi se
+            </button>
           </div>
           <div class="button-conatiner">
             <router-link to="/registracijaKiliA" class="btn btn-primary"
@@ -47,8 +51,32 @@
 </template>
 
 <script>
+import { firebase } from "@/firebase";
+
 export default {
-  // ...
+  name: "login",
+  data() {
+    return {
+      username: "",
+      password: "",
+    };
+  },
+  methods: {
+    login() {
+      console.log("login..." + this.username);
+
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.username, this.password)
+        .then((result) => {
+          console.log("Uspješna prijava", result);
+          this.$router.replace({ name: "home" });
+        })
+        .catch(function (e) {
+          console.error("Došlo je do greške", e);
+        });
+    },
+  },
 };
 </script>
 
@@ -68,7 +96,8 @@ export default {
   min-height: 100vh;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
 }
