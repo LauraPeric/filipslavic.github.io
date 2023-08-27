@@ -16,13 +16,15 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="nav-links">
-        <div class="nav-links">
-          <router-link to="/odabirtipak">Tip kože</router-link> |
-          <router-link to="/registracijaKiliA">Pridruži se</router-link> |
-          <router-link to="/forum">Forum</router-link> |
-          <router-link to="/info">Informacije</router-link> |
-          <a href="#" @click.prevent="logout()" class="nav-links">Odjava</a>
-        </div>
+        <ul class="navbar-nav mr-auto">
+          <div class="nav-links">
+            <router-link to="/odabirtipak">Tip kože</router-link> |
+            <router-link to="/registracijaKiliA">Pridruži se</router-link>|
+            <router-link to="/forum">Forum</router-link> |
+            <router-link to="/info">Informacije</router-link> |
+            <a href="#" @click.prevent="logout()" class="nav-links">Odjava</a>
+          </div>
+        </ul>
         <form
           id="searchbar"
           class="form-inline my-2 my-lg-0 ml-auto"
@@ -43,57 +45,45 @@
 </template>
 
 <script>
-import firebase from "firebase/compat/app";
 import store from "@/store";
+import { firebase } from "@/firebase";
 import router from "@/router";
 
-/*
 firebase.auth().onAuthStateChanged((user) => {
-const currentRoute = router.currentRouter;
-
+  const currentRoute = router.currentRoute;
+  console.log("STANJE PRIJAVE");
   if (user) {
     //korisnik je ulogiran
-    console.log("***", user.email);
-    store.currentuser = user.email;
+    console.log("korisnik", user.email);
+    store.currentUser = user.email;
 
-    if (!currentRoute.meta.needUser){
-    router.push({name: "home"})
-
+    if (currentRoute && currentRoute.meta && currentRoute.meta.needsUser) {
+      router.push({ name: "home" });
+    }
   } else {
     //korisnik nije ulogiran
-    console.log("***", "no user");
-    store.currentuser = null;
-    
-    if (currentRoute.meta.needUser){
-    router.push({name: "login"})
-  }
-}); -store i router valjaju gore, 
-*/ //PROBLEM
+    console.log("*** no user");
+    store.currentUser = null;
 
+    if (currentRoute && currentRoute.meta && currentRoute.meta.needsUser) {
+      router.push({ name: "home" });
+    }
+  }
+});
 export default {
   name: "app",
   data() {
     return {
-      store: "",
-    };
-  }, //PROBLEM
-  data() {
-    return {
-      searchQuery: "",
+      store,
     };
   },
+
   methods: {
     logout() {
       firebase
         .auth()
         .signOut()
-        .then(() => {
-          this.$router.push({ name: "login" });
-        });
-    },
-    performSearch() {
-      // Ovdje implementirati logiku koja se izvršava kada se pritisne Enter
-      this.$router.push({ path: "/", query: { search: this.searchQuery } });
+        .then(() => this.$router.push({ name: "home" }));
     },
   },
 };

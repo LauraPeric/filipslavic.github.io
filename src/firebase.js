@@ -20,5 +20,5 @@ let db = firebase.firestore();
 
 export {
     firebase,
-
+    db,
 };
