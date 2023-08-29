@@ -5,6 +5,10 @@
     <div class="registration-form">
       <h2 class="registration-title">Registriraj se</h2>
       <form @submit.prevent="register">
+        <div v-if="errorMessage" class="alert alert-danger">
+          <strong>Ups!</strong>
+          {{ errorMessage }}
+        </div>
         <div class="form-group">
           <label for="email<">Upišite email</label>
           <input
@@ -20,7 +24,7 @@
           Nikada nećemo dijeliti vaš email s trećim strankama
         </small>
         <div class="form-group">
-          <label for="password">Upišite lozinku</label>
+          <label for="password">Upišite lozinku </label>
           <input
             v-model="password"
             type="password"
@@ -29,6 +33,9 @@
             placeholder="upišite lozinku"
           />
         </div>
+        <small class="form-text text-muted">
+          Lozinka mora sadržavati minimalno 6 znakova
+        </small>
         <div class="form-group">
           <label for="passwordrepeat">Potvrdite lozinku</label>
           <input
@@ -58,6 +65,7 @@ export default {
   name: "Signup",
   data() {
     return {
+      errorMessage: "",
       username: "",
       password: "",
       passwordrepeat: "",
@@ -81,6 +89,9 @@ export default {
 </script>
 
 <style scoped>
+.form-control {
+  width: 100%;
+}
 .registration-page {
   background-color: #e1b8b8;
   height: 100vh;
@@ -91,7 +102,8 @@ export default {
   align-items: center;
 }
 .register-naslov {
-  margin-bottom: 20px;
+  margin-top: -4%;
+  margin-bottom: 4%;
 }
 
 .registration-form {

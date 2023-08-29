@@ -1,7 +1,7 @@
 <template>
   <div class="login-page">
     <div class="page-title">
-      <h1>Prijavi se ovdje!</h1>
+      <h1>Prijavite se ovdje!</h1>
     </div>
     <div class="login-container">
       <div class="login-form">
@@ -39,7 +39,7 @@
               Prijavi se
             </button>
           </div>
-          <div class="button-conatiner">
+          <div class="button-container">
             <router-link to="/registracijaKiliA" class="btn btn-primary"
               >Nazad</router-link
             >
@@ -81,6 +81,9 @@ export default {
 </script>
 
 <style scoped>
+.form-control {
+  width: 100%;
+}
 .form-group {
   margin-bottom: 20px;
 }
@@ -88,7 +91,9 @@ export default {
 .page-title {
   text-align: center;
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-top: -8%;
+  margin-bottom: 5%;
+  margin-right: 1%;
 }
 
 .login-page {
@@ -107,7 +112,7 @@ export default {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  width: 50%;
+  width: 30%;
   height: 40%;
   margin: 0 auto;
 }
@@ -129,12 +134,8 @@ export default {
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
-}
-
-.button-container {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
+  width: 100%;
 }
 
 .btn-primary {

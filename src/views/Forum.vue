@@ -1,94 +1,143 @@
 <template>
   <div class="forum">
-    <div class="sidebar">
-      <div class="search-bar">
-        <input v-model="searchQuery" placeholder="Pretraži forum" />
-        <button @click="searchForum">Traži</button>
-      </div>
-      <button class="add-topic-btn" @click="showAddTopicForm = true">
-        Dodaj svoju temu
-      </button>
-    </div>
     <div class="main-content">
-      <h1>Forum</h1>
+      <div class="forum-naslov">Forum</div>
       <div class="topics">
         <div v-for="topic in topics" :key="topic.id" class="topic">
           <h2>{{ topic.title }}</h2>
           <p>{{ topic.content }}</p>
           <p>Autor: {{ topic.author }}</p>
+          <p>Posted at: {{ formatDate(topic.posted_at) }}</p>
         </div>
+      </div>
+      <div class="sidebar">
+        <button class="add-topic-btn" @click="showAddTopicForm = true">
+          Dodaj svoju temu
+        </button>
       </div>
     </div>
     <div v-if="showAddTopicForm" class="add-topic-form">
       <h2>Dodaj svoju temu</h2>
-      <input v-model="newTopic.title" placeholder="Naslov teme" />
+      <div class="naslovteme">
+        <input v-model="newTopic.title" placeholder="Naslov teme" />
+      </div>
       <textarea
+        class="sadteme"
         v-model="newTopic.content"
         placeholder="Sadržaj teme"
       ></textarea>
-      <button @click="addTopic">Dodaj temu</button>
+      <button class="add-topic-gumb" @click="addTopic">Dodaj temu</button>
     </div>
   </div>
 </template>
 
 <script>
+import store from "@/store";
+import { db } from "@/firebase";
+
 export default {
   data() {
     return {
-      searchQuery: "",
+      search: "",
       showAddTopicForm: false,
       newTopic: {
         title: "",
         content: "",
-        author: "Neki Autor",
+        author: "",
       },
       topics: [
-        {
-          id: 1,
-          title: "nivea ili balea?",
-          content: "nisam siguran treba li odabrati niveu ili baleu.",
-          author: "anto 1",
-        },
-        {
-          id: 2,
-          title: "Druga tema",
-          content: "Sadržaj druge teme",
-          author: "Autor 2",
-        },
         //  ostale teme
       ],
     };
   },
+  mounted() {
+    this.getposts();
+  },
   methods: {
-    searchForum() {
-      // Logika za pretragu foruma prema searchQuery
+    getposts() {
+      db.collection("posts")
+        .get()
+        .then((query) => {
+          query.forEach((doc) => {
+            this.topics.push(doc.data());
+          });
+        })
+        .catch((error) => {
+          console.error("Pogreška", error);
+        });
     },
     addTopic() {
-      this.topics.push({ ...this.newTopic, id: this.topics.length + 1 });
-      this.newTopic.title = "";
-      this.newTopic.content = "";
-      this.showAddTopicForm = false;
+      const newTopicData = {
+        title: this.newTopic.title,
+        content: this.newTopic.content,
+        author: store.currentUser,
+        posted_at: Date.now(),
+      };
+
+      db.collection("posts")
+        .add(newTopicData)
+        .then((docRef) => {
+          newTopicData.id = docRef.id;
+          this.topics.unshift(newTopicData);
+          this.newTopic.title = "";
+          this.newTopic.content = "";
+          this.showAddTopicForm = false;
+        })
+        .catch((error) => {
+          console.error("Error adding topic: ", error);
+        });
+    },
+    formatDate(timestamp) {
+      const date = new Date(timestamp);
+      return date.toLocaleString();
     },
   },
 };
 </script>
 
 <style>
+.topics {
+  background-color: #f9dada;
+  margin-bottom: 10%;
+}
+.naslovteme {
+  margin-top: 10%;
+  margin-bottom: 10%;
+  border: 1px #000000;
+}
+.sadteme {
+  margin-bottom: 10%;
+}
+.forum-naslov {
+  font-size: 50px;
+  margin-bottom: 10%;
+  margin-top: -20%;
+}
+
 .forum {
   display: flex;
   justify-content: space-between;
   padding: 20px;
+  background-color: #e1b8b8;
+  width: 100vw;
+  height: 100vh;
+  padding: 10%;
 }
 
 .sidebar {
   width: 25%;
+  margin-left: 35%;
 }
 
 .search-bar {
   margin-bottom: 10px;
 }
 .add-topic-form {
-  padding-right: 60px;
+  padding: 20px;
+  background-color: #ba9eb9;
+  border-radius: 10px;
+  margin-left: 10%;
+  height: 70%;
 }
 
 .add-topic-btn {
@@ -99,6 +148,15 @@ export default {
   border-radius: 5px;
   cursor: pointer;
 }
+.add-topic-gumb {
+  background-color: purple;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10%;
+}
 
 .main-content {
   width: 70%;
@@ -106,16 +164,8 @@ export default {
 }
 
 .topic {
-  border: 1px solid #ccc;
+  border: 1px solid #000000;
   padding: 10px;
   margin-bottom: 10px;
-}
-
-.add-topic-form {
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #f2f2f2;
-  border: 1px solid #ccc;
-  border-radius: 5px;
 }
 </style>
