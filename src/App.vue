@@ -18,29 +18,54 @@
       <div class="collapse navbar-collapse" id="nav-links">
         <ul class="navbar-nav mr-auto">
           <div class="nav-links">
-            <router-link to="/odabirtipak">Tip kože</router-link> |
+            <router-link to="/odabirtipak">Tip kože </router-link> |
             <router-link to="/registracijaKiliA">Pridruži se</router-link>|
             <router-link to="/forum">Forum</router-link> |
             <router-link to="/info">Informacije</router-link> |
-            <a href="#" @click.prevent="logout()" class="nav-links">Odjava</a>
+            <li>
+              <a href="#" @click.prevent="logout()" class="nav-links">Odjava</a>
+            </li>
           </div>
         </ul>
-        <form
-          id="searchbar"
-          class="form-inline my-2 my-lg-0 ml-auto"
-          @submit.prevent="performSearch"
-        >
+        <form class="form-inline my-2 my-lg-0">
           <input
+            v-model="store.searchterm"
             class="form-control mr-sm-2"
             type="search"
-            placeholder="Pretraži"
+            placeholder="Pretraga"
             aria-label="Search"
-            v-model="searchQuery"
           />
         </form>
       </div>
     </nav>
+
     <router-view />
+    <MDBFooter
+      bg="none"
+      :text="['center', 'white']"
+      style="background-color: #8e8e8e; width: 100%"
+    >
+      <MDBContainer class="p-4 pb-0">
+        <!-- Section: CTA -->
+        <section class="">
+          <p class="d-flex justify-content-center align-items-center">
+            <span class="me-3">Registrirajte se besplatno!</span>
+            <MDBBtn outline="light" rounded> Prijavite se! </MDBBtn>
+          </p>
+        </section>
+        <!-- Section: CTA -->
+      </MDBContainer>
+      <!-- Grid container -->
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        © 2020 Copyright:
+        <a class="text-white" href="https://mdbootstrap.com/"
+          >MDBootstrap.com</a
+        >
+      </div>
+      <!-- Copyright -->
+    </MDBFooter>
+    <!-- Footer -->
   </div>
 </template>
 
@@ -54,15 +79,15 @@ firebase.auth().onAuthStateChanged((user) => {
   console.log("STANJE PRIJAVE");
   if (user) {
     //korisnik je ulogiran
-    console.log("korisnik", user.email);
+    console.log("korisnik je ulogiran:", user.email);
     store.currentUser = user.email;
-
     if (currentRoute && currentRoute.meta && currentRoute.meta.needsUser) {
       router.push({ name: "home" });
     }
   } else {
     //korisnik nije ulogiran
-    console.log("*** no user");
+    console.log(store.currentUser);
+    console.log("Korisnik je odjavljen");
     store.currentUser = null;
 
     if (currentRoute && currentRoute.meta && currentRoute.meta.needsUser) {
@@ -91,13 +116,22 @@ export default {
 
 
 <style lang="scss">
-#searchbar {
-  margin-left: 15%; /* Pomaknite element u desno koristeći automatski margin-left */
-}
-.search-container {
+.mdb-footer {
+  width: 100%;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  position: relative; /* relativni položaj */
+}
+.navbar-nav {
+  margin-left: 2%;
+}
+.form-control {
+  border-block-color: #f9dada;
+  width: 110%;
+}
+.form-inline {
+  margin-left: 55%;
 }
 
 .material-icons {
