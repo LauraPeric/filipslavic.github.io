@@ -25,6 +25,7 @@ const routes = [
   {
     path: '/registracijaKiliA',
     name: 'odabirregistracije',
+
     component: () => import(/* webpackChunkName: "registracijaKiliA" */ '../views/registracijaKiliA.vue')
   },
   {
@@ -54,7 +55,7 @@ const routes = [
     meta: {
       needsUser: true
     },
-    component: () => import(/* webpackChunkName: "about" */ '../components/odabirtipak.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/odabirtipak.vue'),
   },
   {
     path: '/masnakoza',
@@ -155,19 +156,16 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   console.log("stara ruta", from.name, "-->", to.name, "korisnik", store.currentUser)
-
   const noUser = store.currentUser === null;
 
   if (noUser && to.meta.needsUser) {
-    next("Login");
+    next("registracijaKiliA");
   }
   else {
     next();
   }
 });
 
-/*
-DODATI ZA ADMINA NEKE STRANICE KOJE ON MOZE UREDITI
-)*/
+
 
 export default router;
