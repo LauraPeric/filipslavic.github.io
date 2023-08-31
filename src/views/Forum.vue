@@ -6,6 +6,7 @@
         <div v-for="topic in topics" :key="topic.id" class="topic">
           <h2>{{ topic.title }}</h2>
           <p>{{ topic.content }}</p>
+          <p>{{ topic.image }}</p>
           <p>Autor: {{ topic.author }}</p>
           <p>Posted at: {{ formatDate(topic.posted_at) }}</p>
         </div>
@@ -18,6 +19,7 @@
     </div>
     <div v-if="showAddTopicForm" class="add-topic-form">
       <h2>Dodaj svoju temu</h2>
+
       <div class="naslovteme">
         <input v-model="newTopic.title" placeholder="Naslov teme" />
       </div>
@@ -28,6 +30,7 @@
       ></textarea>
       <button class="add-topic-gumb" @click="addTopic">Dodaj temu</button>
     </div>
+    <router-link to="/" class="btn btn-primary">Nazad</router-link>
   </div>
 </template>
 
@@ -96,9 +99,27 @@ export default {
 </script>
 
 <style>
+.btn-primary {
+  background-color: purple;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 8%;
+  margin-left: 10px;
+  margin-top: 40%;
+}
+
+.btn-primary:hover {
+  background-color: rgb(215, 125, 215);
+}
 .topics {
   background-color: #f9dada;
   margin-bottom: 10%;
+  padding: 10px;
+
+  /* margin-bottom: 10px; Remove this line */
 }
 .naslovteme {
   margin-top: 10%;

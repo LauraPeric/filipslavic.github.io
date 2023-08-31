@@ -14,7 +14,7 @@
       <div class="product-content">
         <div class="image-and-text">
           <img
-            src="@/assets/SuhaMaskaLBB.png"
+            src="@/assets/suhakremaPURE.png"
             alt="Proizvod 1"
             class="product-image"
           />
@@ -28,43 +28,34 @@
                 <i class="material-icons">emoji_symbol</i>
               </a>
             </div>
-            <div class="short-text">Osvježavajuća maska za lice krastavac.</div>
+            <div class="short-text">Osvježavajuća krema za lice.</div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="rating">
-      <span
-        class="star"
-        v-for="(star, index) in stars"
-        :key="index"
-        @click="updateStars(index + 1)"
-      >
-        {{ star }}
-      </span>
+      <div class="rating">
+        <span
+          class="star"
+          v-for="(star, index) in stars"
+          :key="index"
+          @click="updateStars(index + 1)"
+        >
+          {{ star }}
+        </span>
+      </div>
     </div>
     <div class="description">
-      Look Pure maska<br />
+      Look Pure krema<br />
       <br />
-      Kombinacija šminke i njege: nježna, lagano prekrivajuća tekstura osigurava
-      ujednačen ten uz hidratizirajući ekstrakt nara. Optički prikriva
-      nedostatke kože i štiti s faktorom zaštite SPF 25. Lagana tekstura se lako
-      razmazuje i brzo upija. Dermatološki je potvrđena podnošljivost za kožu.
-      <br />
-      <br />
-
-      Općenito Sastojci: AQUA, cink oksid, CI 77891, oktildodekanol, C12-15
-      alkil benzoat, glicerin, glicerin stearat, cetearil alkohol, Olea europaea
-      voćno ulje, pektin, maslac Butyrospermum parkii, ulje sjemenki Punica
-      granatum, fenoksietanol, CI 77492, propilen glikol, celulozna guma,
-      parfem, CI 77491, Pentaeritritil tetra-di-t-butyl hydroksihidrocinamat,
-      dekilen glikol, CI 77499.
+      Nježno prekrivajuća tekstura s ekstraktom nara koji zadržava vlagu
+      osigurava ujednačen ten. Vizualno prikriva nečistoće kože i štiti sa
+      zaštitinim fakstorom SPF 25. Lagana tekstura lako se stapa i brzo upija.
     </div>
-    <router-link to="/MaskezaliceS" class="btn btn-primary btn-block">
+    <router-link to="/kremazaliceS" class="btn btn-primary btn-block">
       Nazad
     </router-link>
   </div>
 </template>
+
 
 <script>
 export default {

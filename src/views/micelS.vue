@@ -1,6 +1,7 @@
+
 <template>
   <div class="maskezaliceM">
-    <h1 class="title">Maske za lice - Masna koža</h1>
+    <h1 class="title">Micelarna voda za lice - Suha koža</h1>
 
     <div class="row">
       <div class="col 6">
@@ -11,7 +12,7 @@
         />
       </div>
     </div>
-    <router-link to="/masnakoza" class="btn btn-primary">Nazad</router-link>
+    <router-link to="/suhakoza" class="btn btn-primary">Nazad</router-link>
   </div>
 </template>
 
@@ -21,25 +22,25 @@ import store from "@/store";
 
 let cards = [
   {
-    url: require("@/assets/MasnaMaskaCuc.png"),
-    cardtitle: "Missha",
-    cardtext: "Airy Fit maska za lice krastavac",
-    route: "/Missha",
+    url: require("@/assets/suhavodaR2.jpg"),
+    cardtitle: "Balea",
+    cardtext: " Vitaminski serum, 30ml",
+    route: "/Balea",
   },
   {
-    url: require("@/assets/MasnaMaskaNiv.png"),
+    url: require("@/assets/suhavodaN.png"),
     cardtitle: "Nivea",
-    cardtext: "Osvježavajuća maska za lice u maramici Good Morning Fresh, 15ml",
+    cardtext: "5-u-1 micelarna voda za osjetljivu kožu, 400 ml",
   },
   {
-    url: require("@/assets/MasnaMaskaGli.png"),
-    cardtitle: "Biofarm",
-    cardtext: "100% RAW glina s Mrtvog mora, 70 g",
+    url: require("@/assets/suhavodaZ.jpg"),
+    cardtitle: "Ziaja",
+    cardtext: "Micelarna voda za osjetljivu kožu, 390 ml",
   },
   {
-    url: require("@/assets/MasnaMaskaZuto.png"),
-    cardtitle: "Olival",
-    cardtext: "  Aktivna maska - smilje, 75 ml",
+    url: require("@/assets/suhavodaG.jpg"),
+    cardtitle: "Garnier Skin Naturals ",
+    cardtext: "Micellar Hyaluronic Aloe Water micelarna voda za lice, 400 ml",
   },
 ];
 

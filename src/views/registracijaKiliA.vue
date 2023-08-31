@@ -24,6 +24,7 @@
   </div>
 </template>
 
+
 <style scoped>
 .registration-title {
   font-size: 24px;
@@ -47,12 +48,9 @@
   max-width: 40%; /* postaviti maksimalnu širinu */
 }
 
-.prijireg {
-  font-size: 20px;
-}
-
+.prijireg,
 .koriadmin {
-  font-size: 25px;
+  font-size: 22px;
 }
 
 .btn-primary {
@@ -82,7 +80,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   background-color: #e1b8b8;
   flex-direction: column;
 }

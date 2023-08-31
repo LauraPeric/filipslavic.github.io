@@ -2,10 +2,10 @@
   <div class="product-details">
     <div class="header">
       <div class="logo-and-availability">
-        <div class="availability">Dostupno u Muller Hrvatska!</div>
-        <a href="https://www.mueller.hr/">
+        <div class="availability">Dostupno u DM Hrvatska!</div>
+        <a href="https://www.dm.hr/">
           <div class="logo">
-            <img src="@/assets/MULLER2.png" alt="Company Logo" />
+            <img src="@/assets/DM.png" alt="Company Logo" />
           </div>
         </a>
       </div>
@@ -14,54 +14,45 @@
       <div class="product-content">
         <div class="image-and-text">
           <img
-            src="@/assets/masnakremaDR.png"
+            src="@/assets/suhaserumL1.png"
             alt="Proizvod 1"
             class="product-image"
           />
           <div class="text-content">
             <div class="buy-online">
               <a
-                href="https://www.mueller.hr/moja-poslovnica/"
+                href="https://www.dm.hr/l-adria-serum-za-hidrataciju-lica-instant-revitalizing-p3859893626005.html"
                 class="buy-online"
               >
-                POPIS POSLOVNICA OVJDE!
-                <i class="material-icons">emoji_symbol</i>
+                KUPITE ONLINE! <i class="material-icons">emoji_symbol</i>
               </a>
             </div>
-            <div class="short-text">Osvježavajuća maska za lice krastavac.</div>
+            <div class="short-text">Instant Revitalizing Serum</div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="rating">
-      <span
-        class="star"
-        v-for="(star, index) in stars"
-        :key="index"
-        @click="updateStars(index + 1)"
-      >
-        {{ star }}
-      </span>
+      <div class="rating">
+        <span
+          class="star"
+          v-for="(star, index) in stars"
+          :key="index"
+          @click="updateStars(index + 1)"
+        >
+          {{ star }}
+        </span>
+      </div>
     </div>
     <div class="description">
-      DR<br />
+      L'ADRIA <br />
       <br />
-      Opis proizvoda:
-      <br />
-      Dubinski čisti i osvježava kožu lica ekstrakti ljekovitih biljaka izravno
-      oslobađaju snagu kojom čiste i njeguju kožu kompozicija Dr. Hauschka kreme
-      revitalizira i čisti kožu kremu ne nanositi na područje oko očiju i ne
-      koristite kao piling OTC Dr. Hauschka krema za čišćenje lica dubinski
-      čisti i osvježava kožu.
-      <br /><br />
-      Zahvaljujući ugodno kremastom bademovom brašnu, dragocjeni ekstrakti
-      ljekovitih biljaka izravno oslobađaju snagu kojom čiste i njeguju kožu.
-      <br />
-      Kompozicija Dr. Hauschka kreme s ekstraktima ljekovitog bilja nevena,
-      kamilice, gospine trave, bjelodana i badema nježno revitalizira i čisti
-      kožu.
+      Instant Revitalizing Serum pruža trenutnu revitalizaciju svim tipovima
+      kože na prirodan način. Djeluje inovativnom osmolitičkom strategijom kojom
+      donosi vlagu i u same stanice kože, stoga ona ostaje dulje dubinski
+      hidratizirana. L'ADRIA Instant Revitalizing Serum vidno hidratizira, a ne
+      ostavlja ljepljiv osjećaj na koži koji je čest kod jednostavnijih seruma s
+      hijaluronom. Fine bore ostaju popunjene, a koža izgleda vidno svježija.
     </div>
-    <router-link to="/KremazaliceM" class="btn btn-primary btn-block">
+    <router-link to="/serumigeloviS" class="btn btn-primary btn-block">
       Nazad
     </router-link>
   </div>
@@ -69,19 +60,63 @@
 
 
 <script>
+import { firebase, db } from "@/firebase";
 export default {
   data() {
     return {
-      stars: ["☆", "☆", "☆", "☆", "☆"], // inicijalizacija praznih zvijezdica
+      stars: ["☆", "☆", "☆", "☆", "☆"],
+      productIndex: null,
+      userId: null,
     };
   },
   methods: {
     updateStars(num) {
       this.stars = this.stars.map((star, index) => (index < num ? "★" : "☆"));
+
+      if (this.userId !== null && this.productIndex !== null) {
+        db.collection("ratings")
+          .doc(`${this.userId}_${this.productIndex}`)
+          .set({ rating: num })
+          .then(() => {
+            console.log("Ocjena je spremljena u firestore");
+          })
+          .catch((error) => {
+            console.error("Pogreška prilikom spremanja u firestore", error);
+          });
+      }
     },
+    fetchUserRating() {
+      if (this.userId !== null && this.productIndex !== null) {
+        db.collection("ratings")
+          .doc(`${this.userId}_${this.productIndex}`)
+          .get()
+          .then((doc) => {
+            if (doc.exists) {
+              const rating = doc.data().rating;
+              this.updateStars(rating);
+            }
+          })
+          .catch((error) => {
+            console.error(
+              "Pogreška prilikom uvoda korisnika it firestora",
+              error
+            );
+          });
+      }
+    },
+  },
+  created() {
+    this.productIndex = this.$route.params.productIndex;
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.userId = user.uid;
+        this.fetchUserRating();
+      }
+    });
   },
 };
 </script>
+
 
 <style scoped>
 .star {
@@ -94,7 +129,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
   width: 100vw; /* sadržaj prekrio cijeli širinu */
   box-sizing: border-box; /* Osigurava da padding ne dodaje dodatnu širinu */
 }

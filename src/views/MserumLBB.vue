@@ -14,7 +14,7 @@
       <div class="product-content">
         <div class="image-and-text">
           <img
-            src="@/assets/SuhaMaskaLBB.png"
+            src="@/assets/masnaserumLBB.png"
             alt="Proizvod 1"
             class="product-image"
           />
@@ -28,23 +28,14 @@
                 <i class="material-icons">emoji_symbol</i>
               </a>
             </div>
-            <div class="short-text">Osvježavajuća maska za lice krastavac.</div>
+            <div class="short-text">Osvježavajući serum za lice.</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="rating">
-      <span
-        class="star"
-        v-for="(star, index) in stars"
-        :key="index"
-        @click="updateStars(index + 1)"
-      >
-        {{ star }}
-      </span>
-    </div>
+
     <div class="description">
-      Look Pure maska<br />
+      Look Pure Serum<br />
       <br />
       Kombinacija šminke i njege: nježna, lagano prekrivajuća tekstura osigurava
       ujednačen ten uz hidratizirajući ekstrakt nara. Optički prikriva
@@ -54,38 +45,15 @@
       <br />
 
       Općenito Sastojci: AQUA, cink oksid, CI 77891, oktildodekanol, C12-15
-      alkil benzoat, glicerin, glicerin stearat, cetearil alkohol, Olea europaea
-      voćno ulje, pektin, maslac Butyrospermum parkii, ulje sjemenki Punica
-      granatum, fenoksietanol, CI 77492, propilen glikol, celulozna guma,
-      parfem, CI 77491, Pentaeritritil tetra-di-t-butyl hydroksihidrocinamat,
-      dekilen glikol, CI 77499.
+      alkil benzoat, glicerin...
     </div>
-    <router-link to="/MaskezaliceS" class="btn btn-primary btn-block">
+    <router-link to="/serumigeloviM" class="btn btn-primary btn-block">
       Nazad
     </router-link>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      stars: ["☆", "☆", "☆", "☆", "☆"], // inicijalizacija praznih zvijezdica
-    };
-  },
-  methods: {
-    updateStars(num) {
-      this.stars = this.stars.map((star, index) => (index < num ? "★" : "☆"));
-    },
-  },
-};
-</script>
-
 <style scoped>
-.star {
-  cursor: pointer;
-  font-size: 30px;
-}
 .product-details {
   background-color: #e1b8b8;
   padding: 20px;
@@ -94,7 +62,7 @@ export default {
   align-items: center;
   height: 100vh;
   width: 100vw;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Osigurava da padding ne dodaje dodatnu širinu */
 }
 
 .product {
@@ -117,7 +85,7 @@ export default {
 }
 
 .text-content {
-  width: calc(100% - 220px);
+  width: calc(100% - 220px); /* Prilagodite širinu prema potrebama */
 }
 
 .product-image {

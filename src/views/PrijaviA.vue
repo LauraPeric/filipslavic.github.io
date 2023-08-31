@@ -1,7 +1,7 @@
 <template>
   <div class="registration-container">
     <div class="prijavia-naslov">
-      <h1>Prijavi se kao admin</h1>
+      <h1>Prijavite se kao administrator</h1>
     </div>
     <div class="registration-box">
       <div class="sections-container">
@@ -16,7 +16,7 @@
                 type="text"
                 id="Korisničko ime"
                 class="form-control"
-                placeholder="vaše korisničko ime"
+                placeholder="korisničko ime"
               />
             </div>
             <div class="login-header">
@@ -28,7 +28,7 @@
                 type="password"
                 id="lozinka"
                 class="form-control"
-                placeholder="vaša lozinka"
+                placeholder="upišite lozinku"
               />
             </div>
             <div class="button-container">
@@ -59,20 +59,22 @@ export default {
     };
   },
   methods: {
-    loginAdmin() {
-      // Logika za prijavu administratora
-    },
+    loginAdmin() {},
   },
 };
 </script>
 
 <style scoped>
+.form-control {
+  width: 100%;
+}
+
 .registration-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   flex-direction: column;
   background-color: #e1b8b8;
 }
@@ -80,7 +82,9 @@ export default {
 .prijavia-naslov {
   text-align: center;
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-top: -8%;
+  margin-bottom: 5%;
+  margin-right: 1%;
 }
 
 .registration-box {
@@ -88,7 +92,7 @@ export default {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  width: 50%;
+  width: 30%;
   height: 40%;
   margin: 0 auto;
 }

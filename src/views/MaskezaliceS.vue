@@ -1,122 +1,116 @@
 <template>
-  <div class="maskezaliceM">
+  <div class="maskezaliceS">
     <h1 class="title">Maske za lice - Suha koža</h1>
 
-    <!-- Prvi red proizvoda -->
-    <div class="product-row">
-      <router-link to="/LBB" class="product-item clickable">
-        <img
-          src="@/assets/SuhaMaskaLBB.png"
-          alt="Proizvod 1"
-          class="product-image"
+    <div class="row">
+      <div class="col 6">
+        <item-card-vue
+          v-for="card in filtercards"
+          :key="card.url"
+          :info="card"
         />
-        <div class="product-text">
-          Look Pure <br />
-          Skin perfection BB maska
-        </div>
-      </router-link>
-      <div class="product-item clickable">
-        <img
-          src="@/assets/MasnaMaskaNiv.png"
-          alt="Proizvod 2"
-          class="product-image"
-        />
-        <div class="product-text">
-          NIVEA<br />
-          Osvježavajuća maska za lice u maramici Good Morning Fresh, 15 ml
-        </div>
       </div>
     </div>
-
-    <!-- Drugi red proizvoda -->
-    <div class="product-row">
-      <div class="product-item clickable">
-        <img
-          src="@/assets/MasnaMaskaGli.png"
-          alt="Proizvod 3"
-          class="product-image"
-        />
-        <div class="product-text">
-          biofarm <br />
-          100% RAW glina s Mrtvog mora, 70 g
-        </div>
-      </div>
-      <div class="product-item clickable">
-        <img
-          src="@/assets/MasnaMaskaZuto.png"
-          alt="Proizvod 4"
-          class="product-image"
-        />
-        <div class="product-text">
-          OLIVAL <br />
-          Aktivna maska - smilje, 75 ml
-        </div>
-      </div>
-    </div>
-
-    <router-link to="/suhakoza" class="btn-back">Nazad</router-link>
+    <router-link to="/suhakoza" class="btn btn-primary">Nazad</router-link>
   </div>
 </template>
 
+<script>
+import ItemCardVue from "@/components/ItemCard.vue";
+import store from "@/store";
+
+let cards = [
+  {
+    url: require("@/assets/SuhaMaskaLBB.png"),
+    cardtitle: " Look Pure",
+    cardtext: "Skin perfection BB maska",
+    route: "/LBB",
+  },
+  {
+    url: require("@/assets/suhamaskaBYE.png"),
+    cardtitle: "Nivea",
+    cardtext: "Osvježavajuća maska za lice u maramici Good Morning Fresh, 15ml",
+  },
+  {
+    url: require("@/assets/suhamaskaSMED.png"),
+    cardtitle: "Micaraa",
+    cardtext: "maska za višenamjenjsku upotrebu suhog lica",
+  },
+  {
+    url: require("@/assets/suhamaskacera.png"),
+    cardtitle: "CeraVe",
+    cardtext: "Maska za čišćenje za suhog lica ",
+  },
+];
+
+export default {
+  name: "MaskeM",
+  data: function () {
+    return {
+      cards,
+      store,
+    };
+  },
+  computed: {
+    filtercards() {
+      //logika koja filtrira cards
+      let termin = this.store.searchterm;
+      console.log("search termin:", termin);
+      return this.cards.filter((card) => card.cardtitle.includes(termin));
+    },
+  },
+  components: {
+    ItemCardVue,
+  },
+};
+</script>
+
 <style scoped>
-.maskezaliceM {
+.maskezaliceS {
   background-color: #e1b8b8;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  min-height: 100vh;
+  width: 100vw;
+}
+
+.row {
+  width: 50%;
+  margin-left: 11.5%;
+  margin-bottom: 4%;
 }
 
 .title {
-  font-size: 24px;
-  margin-bottom: 6%;
-  margin-top: 6%;
+  font-size: 34px;
+  margin-top: 4%;
+  margin-bottom: 3%;
 }
 
-.product-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10%; /* razmak redova proizvoda */
-}
-
-.product-item {
-  background-color: #f9dada;
-  padding: 10px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  width: 40%;
+.card {
+  width: 80%;
   margin-bottom: 10px;
+  margin-left: 9%;
+  border-color: #f9dada;
+}
+.card-body {
+  background-color: #f9dada;
+  padding: 20px;
 }
 
 .clickable {
   cursor: pointer;
 }
 
-.product-image {
-  width: 80px;
-  height: 80px;
-  margin-right: 10px;
-}
-
-.product-text {
-  color: #2c3e50;
-  font-size: 14px;
-  text-align: left;
-}
-
-.btn-back {
+.btn-primary {
   background-color: purple;
-  color: white;
-  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px;
+  padding: 10px 20px;
+  margin-top: -3%;
+  margin-bottom: 2%;
 }
 
-.btn-back:hover {
+.btn-primary:hover {
   background-color: rgb(215, 125, 215);
 }
 </style>

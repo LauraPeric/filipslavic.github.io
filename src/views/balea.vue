@@ -2,10 +2,10 @@
   <div class="product-details">
     <div class="header">
       <div class="logo-and-availability">
-        <div class="availability">Dostupno u BIPA Hrvatska!</div>
-        <a href="https://www.bipa.hr/vlastite-marke/look-by-bipa">
+        <div class="availability">Dostupno u Muller Hrvatska!</div>
+        <a href="https://www.mueller.hr/">
           <div class="logo">
-            <img src="@/assets/BIPA.png" alt="Company Logo" />
+            <img src="@/assets/MULLER2.png" alt="Company Logo" />
           </div>
         </a>
       </div>
@@ -14,21 +14,21 @@
       <div class="product-content">
         <div class="image-and-text">
           <img
-            src="@/assets/SuhaMaskaLBB.png"
+            src="@/assets/suhavodaR2.jpg"
             alt="Proizvod 1"
             class="product-image"
           />
           <div class="text-content">
             <div class="buy-online">
               <a
-                href="https://www.bipa.hr/vlastite-marke/look-by-bipa"
+                href="https://www.mueller.hr/moja-poslovnica/"
                 class="buy-online"
               >
                 POPIS POSLOVNICA OVJDE!
                 <i class="material-icons">emoji_symbol</i>
               </a>
             </div>
-            <div class="short-text">Osvježavajuća maska za lice krastavac.</div>
+            <div class="short-text">Micelarna voda - ruža.</div>
           </div>
         </div>
       </div>
@@ -44,33 +44,33 @@
       </span>
     </div>
     <div class="description">
-      Look Pure maska<br />
+      Balea Micelarna voda za suhu i osjetljivu kožu – ruža <br />
       <br />
-      Kombinacija šminke i njege: nježna, lagano prekrivajuća tekstura osigurava
-      ujednačen ten uz hidratizirajući ekstrakt nara. Optički prikriva
-      nedostatke kože i štiti s faktorom zaštite SPF 25. Lagana tekstura se lako
-      razmazuje i brzo upija. Dermatološki je potvrđena podnošljivost za kožu.
+      Veganska formula za suhu i osjetljivu kožu uklanja makeup i nečistoće bez
+      parfema, alkohola i mikroplastike. Balea Rose micelarna voda za čišćenje
+      lica idealan je izbor ako imate problematičnu kožu.
       <br />
       <br />
-
-      Općenito Sastojci: AQUA, cink oksid, CI 77891, oktildodekanol, C12-15
-      alkil benzoat, glicerin, glicerin stearat, cetearil alkohol, Olea europaea
-      voćno ulje, pektin, maslac Butyrospermum parkii, ulje sjemenki Punica
-      granatum, fenoksietanol, CI 77492, propilen glikol, celulozna guma,
-      parfem, CI 77491, Pentaeritritil tetra-di-t-butyl hydroksihidrocinamat,
-      dekilen glikol, CI 77499.
+      Sa samo jednim proizvodom možete temeljito očistiti lice, oči i usne.
+      Nježno uklanja ostatke makeupa i nečistoće te omogućuje koži da diše.
+      Formula bez alkohola i parfema sadrži 90 % sastojaka prirodnog porijekla
+      te ne isušuje kožu. Baš suprotno, ova micelarna voda intenzivno i
+      dugotrajno hidratizira kožu, čisti ju i štiti od isušivanja. Blaga
+      receptura idealna je i za osobe koje nose kontaktne leće. Savršeno nježno
+      čišćenje osjetljive kože.
     </div>
-    <router-link to="/MaskezaliceS" class="btn btn-primary btn-block">
+    <router-link to="/micelS" class="btn btn-primary btn-block">
       Nazad
     </router-link>
   </div>
 </template>
 
+
 <script>
 export default {
   data() {
     return {
-      stars: ["☆", "☆", "☆", "☆", "☆"], // inicijalizacija praznih zvijezdica
+      stars: ["☆", "☆", "☆", "☆", "☆"], // Initialize with empty stars
     };
   },
   methods: {
@@ -84,7 +84,7 @@ export default {
 <style scoped>
 .star {
   cursor: pointer;
-  font-size: 30px;
+  font-size: 30px; /* Adjust the font size for larger stars */
 }
 .product-details {
   background-color: #e1b8b8;
@@ -92,9 +92,9 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
-  box-sizing: border-box;
+  min-height: 100vh;
+  width: 100vw; /* sadržaj prekrio cijeli širinu */
+  box-sizing: border-box; /* Osigurava da padding ne dodaje dodatnu širinu */
 }
 
 .product {
@@ -117,7 +117,7 @@ export default {
 }
 
 .text-content {
-  width: calc(100% - 220px);
+  width: calc(100% - 220px); /* Prilagoditi širinu */
 }
 
 .product-image {

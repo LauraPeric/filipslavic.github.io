@@ -2,10 +2,10 @@
   <div class="product-details">
     <div class="header">
       <div class="logo-and-availability">
-        <div class="availability">Dostupno u BIPA Hrvatska!</div>
-        <a href="https://www.bipa.hr/vlastite-marke/look-by-bipa">
+        <div class="availability">Dostupno u DM Hrvatska!</div>
+        <a href="https://www.dm.hr/">
           <div class="logo">
-            <img src="@/assets/BIPA.png" alt="Company Logo" />
+            <img src="@/assets/DM.png" alt="Company Logo" />
           </div>
         </a>
       </div>
@@ -14,21 +14,20 @@
       <div class="product-content">
         <div class="image-and-text">
           <img
-            src="@/assets/SuhaMaskaLBB.png"
+            src="@/assets/masnavodaZ.jpeg"
             alt="Proizvod 1"
             class="product-image"
           />
           <div class="text-content">
             <div class="buy-online">
               <a
-                href="https://www.bipa.hr/vlastite-marke/look-by-bipa"
+                href="https://www.dm.hr/ziaja-med-anti-imperfections-tonik-za-lice-za-masnu-kozu-p5901887030386.html"
                 class="buy-online"
               >
-                POPIS POSLOVNICA OVJDE!
-                <i class="material-icons">emoji_symbol</i>
+                KUPITE ONLINE! <i class="material-icons">emoji_symbol</i>
               </a>
             </div>
-            <div class="short-text">Osvježavajuća maska za lice krastavac.</div>
+            <div class="short-text">Med tonik.</div>
           </div>
         </div>
       </div>
@@ -44,23 +43,20 @@
       </span>
     </div>
     <div class="description">
-      Look Pure maska<br />
-      <br />
-      Kombinacija šminke i njege: nježna, lagano prekrivajuća tekstura osigurava
-      ujednačen ten uz hidratizirajući ekstrakt nara. Optički prikriva
-      nedostatke kože i štiti s faktorom zaštite SPF 25. Lagana tekstura se lako
-      razmazuje i brzo upija. Dermatološki je potvrđena podnošljivost za kožu.
-      <br />
-      <br />
-
-      Općenito Sastojci: AQUA, cink oksid, CI 77891, oktildodekanol, C12-15
-      alkil benzoat, glicerin, glicerin stearat, cetearil alkohol, Olea europaea
-      voćno ulje, pektin, maslac Butyrospermum parkii, ulje sjemenki Punica
-      granatum, fenoksietanol, CI 77492, propilen glikol, celulozna guma,
-      parfem, CI 77491, Pentaeritritil tetra-di-t-butyl hydroksihidrocinamat,
-      dekilen glikol, CI 77499.
+      Ziaja <br />
+      <br />MED tonik za čišćenje lica prikladan je protiv nepravilnosti i akni
+      za njegu masne kože. Dermatološka formula namijenjena je za odrasle i
+      tinejdžere. Nježno čisti kožu, smanjuje lučenje sebuma i umiruje upaljene
+      akne. Ziaja MED tonik za čišćenje lica obnavlja prirodni pH kože i
+      smanjuje osjećaj zatezanja epiderme. <br />
+      <br />Sadži alantoin koji izvrsno umiruje nadraženu kožu, kompleks cinka i
+      proteina koji smanjuju prekomjerno lučenje sebuma i učinkovito rješavaju
+      probleme masne kože te provitamin B5. 99 % sastojaka je prirodnog
+      podrijetla, veganski je proizvod, ne sadrži silikon, gluten, SLES sulfate,
+      mineralna ulja i mikroplastiku.
     </div>
-    <router-link to="/MaskezaliceS" class="btn btn-primary btn-block">
+
+    <router-link to="/micelM" class="btn btn-primary btn-block">
       Nazad
     </router-link>
   </div>
@@ -93,8 +89,8 @@ export default {
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  width: 100vw;
-  box-sizing: border-box;
+  width: 100vw; /* sadržaj prekrio cijeli širinu */
+  box-sizing: border-box; /* Osigurava da padding ne dodaje dodatnu širinu */
 }
 
 .product {
@@ -117,7 +113,7 @@ export default {
 }
 
 .text-content {
-  width: calc(100% - 220px);
+  width: calc(100% - 220px); /* Prilagoditi širinu */
 }
 
 .product-image {

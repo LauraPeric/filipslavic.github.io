@@ -10,7 +10,7 @@
       <div class="text-box">
         <p class="home-text">
           Dobrodošli na stranicu Facial Care Me!
-          <br />
+          <br /><br />
           Kako bi mogli koristiti stranicu prijavite se. Stranica Facial Care Me
           vam omogućuje pregled proizvoda koji su najpovoljniji za njegu vašeg
           tipa kože. Na stranici možete ocjenjivati proizvode dajući između 1 i
@@ -20,7 +20,6 @@
         </p>
       </div>
     </div>
-    <router-link to="/info" class="btn btn-primary">Informacije</router-link>
   </div>
 </template>
 
@@ -99,6 +98,7 @@ export default {
   flex-direction: column;
   align-items: flex-start;
   margin-top: 20px;
+  height: 30%;
 }
 
 .text-box {

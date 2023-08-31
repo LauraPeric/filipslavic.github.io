@@ -32,8 +32,18 @@
         </div>
       </div>
     </div>
+    <div class="rating">
+      <span
+        class="star"
+        v-for="(star, index) in stars"
+        :key="index"
+        @click="updateStars(index + 1)"
+      >
+        {{ star }}
+      </span>
+    </div>
     <div class="description">
-      MISSHA<br />
+      MISSHA<br /><br />
       Maska za lice AiryFit krastavac donosi iznimno ugodnu brigu vašoj koži. S
       obogaćenom formulom koja sadrži ekstrakt krastavca, pruža intenzivnu
       hidrataciju i doprinosi ljepšem i zdravijem izgledu kože. <br />Ova maska
@@ -42,19 +52,82 @@
       maske u hladnjaku. MISSHA maska za lice AiryFit krastavac je idealan izbor
       za sve koji traže intenzivnu hidrataciju i čisto lice.
     </div>
-    <router-link to="/maskezaliceM" class="btn-back"> Nazad </router-link>
+    <router-link to="/maskezaliceM" class="btn btn-primary btn-block">
+      Nazad
+    </router-link>
   </div>
 </template>
+<script>
+import { firebase, db } from "@/firebase";
+export default {
+  data() {
+    return {
+      stars: ["☆", "☆", "☆", "☆", "☆"],
+      productIndex: null,
+      userId: null,
+    };
+  },
+  methods: {
+    updateStars(num) {
+      this.stars = this.stars.map((star, index) => (index < num ? "★" : "☆"));
+
+      if (this.userId !== null && this.productIndex !== null) {
+        db.collection("ratings")
+          .doc(`${this.userId}_${this.productIndex}`)
+          .set({ rating: num })
+          .then(() => {
+            console.log("Ocjena je spremljena u firestore");
+          })
+          .catch((error) => {
+            console.error("Pogreška prilikom spremanja u firestore", error);
+          });
+      }
+    },
+    fetchUserRating() {
+      if (this.userId !== null && this.productIndex !== null) {
+        db.collection("ratings")
+          .doc(`${this.userId}_${this.productIndex}`)
+          .get()
+          .then((doc) => {
+            if (doc.exists) {
+              const rating = doc.data().rating;
+              this.updateStars(rating);
+            }
+          })
+          .catch((error) => {
+            console.error(
+              "Pogreška prilikom uvoda korisnika it firestora",
+              error
+            );
+          });
+      }
+    },
+  },
+  created() {
+    this.productIndex = this.$route.params.productIndex;
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.userId = user.uid;
+        this.fetchUserRating();
+      }
+    });
+  },
+};
+</script>
 
 <style scoped>
+.star {
+  cursor: pointer;
+  font-size: 30px;
+}
 .product-details {
   background-color: #e1b8b8;
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-  width: 100%; /* sadržaj prekrio cijeli širinu */
+  height: 100vh;
+  width: 100vw; /* sadržaj prekrio cijeli širinu */
   box-sizing: border-box; /* Osigurava da padding ne dodaje dodatnu širinu */
 }
 
@@ -93,6 +166,14 @@
   align-items: center;
   width: 100%;
   margin-bottom: 20px;
+}
+.rating {
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+.star {
+  cursor: pointer;
 }
 
 .logo-and-availability {
@@ -148,17 +229,15 @@
   font-size: 16px;
 }
 
-.btn-back {
+.btn-primary {
   background-color: purple;
-  color: white;
-  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px;
+  padding: 10px 20px;
+  margin: 70px;
 }
 
-.btn-back:hover {
+.btn-primary:hover {
   background-color: rgb(215, 125, 215);
 }
 </style>

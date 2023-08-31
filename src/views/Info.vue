@@ -18,15 +18,6 @@
           <input v-model="email" type="email" id="email" class="form-control" />
         </div>
         <div class="form-group">
-          <label for="naslovPoruke">Naslov poruke</label>
-          <input
-            v-model="naslovPoruke"
-            type="text"
-            id="naslovPoruke"
-            class="form-control"
-          />
-        </div>
-        <div class="form-group">
           <label for="poruka">Poruka</label>
           <textarea
             v-model="poruka"
@@ -40,28 +31,60 @@
     <router-link to="/" class="btn btn-primary">Nazad</router-link>
   </div>
 </template>
-
 <script>
+import emailjs from "emailjs-com";
+
 export default {
   data() {
     return {
       ime: "",
       email: "",
-      naslovPoruke: "",
       poruka: "",
     };
   },
   methods: {
     sendContactMessage() {
-      // logika za slanje poruke
-      // koristiti podatke iz this.ime, this.email, this.naslovPoruke, this.poruka
-      console.log(
-        "Poruka poslana:",
-        this.ime,
-        this.email,
-        this.naslovPoruke,
-        this.poruka
+      const serviceID = "service_FacialCareMe";
+      const templateId = "template_xlbl89e";
+      const PublicKey = "e8nc97p9mbQL-mIMT";
+
+      const templateParams = {
+        to_email: this.email, // email korisnika
+        from_name: "Facial Care me",
+        from_email: "lauraperic2002@gmail.com",
+        message: "Thank you for your message. We will get back to you soon!",
+      };
+
+      //  auto-reply korisniku
+      emailjs.send(serviceID, templateId, templateParams, PublicKey).then(
+        () => {
+          console.log("Auto-reply sent successfully!");
+        },
+        (error) => {
+          console.error("Error sending auto-reply:", error);
+        }
       );
+
+      // poruka na moj email
+      const messageParams = {
+        to_email: "lauraperic2002@gmail.com", // moja email adresa
+        from_name: this.ime,
+        from_email: this.email,
+        message: this.poruka,
+      };
+
+      emailjs
+        .send(serviceID, templateId, messageParams, PublicKey)
+        .then(() => {
+          console.log("Message sent successfully!");
+          // cista forma
+          this.ime = "";
+          this.email = "";
+          this.poruka = "";
+        })
+        .catch((error) => {
+          console.error("Error sending message:", error);
+        });
     },
   },
 };
@@ -71,7 +94,8 @@ export default {
 .information-page {
   background-color: #e1b8b8;
   padding: 50px;
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
 }
 
 .information-title {

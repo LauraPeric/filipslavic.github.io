@@ -1,6 +1,6 @@
 <template>
-  <div class="maskezaliceM">
-    <h1 class="title">Maske za lice - Masna koža</h1>
+  <div class="serumigeloviM">
+    <h1 class="title">Serumi i gelovi za lice - Masna koža</h1>
 
     <div class="row">
       <div class="col 6">
@@ -21,25 +21,25 @@ import store from "@/store";
 
 let cards = [
   {
-    url: require("@/assets/MasnaMaskaCuc.png"),
-    cardtitle: "Missha",
-    cardtext: "Airy Fit maska za lice krastavac",
-    route: "/Missha",
+    url: require("@/assets/masnaserumLBB.png"),
+    cardtitle: "Look Pure Serum",
+    cardtext: "Serum za čišćenje lica masne kože",
+    route: "/MserumLBB",
   },
   {
-    url: require("@/assets/MasnaMaskaNiv.png"),
-    cardtitle: "Nivea",
-    cardtext: "Osvježavajuća maska za lice u maramici Good Morning Fresh, 15ml",
+    url: require("@/assets/masnaserumA.png"),
+    cardtitle: "Ladria",
+    cardtext: "Serum za pročišćavanje masnog lica",
   },
   {
-    url: require("@/assets/MasnaMaskaGli.png"),
-    cardtitle: "Biofarm",
-    cardtext: "100% RAW glina s Mrtvog mora, 70 g",
+    url: require("@/assets/masnaserumPLAVO.png"),
+    cardtitle: "Nacomi",
+    cardtext: "Serum sa 15% naicinamida ,30ml",
   },
   {
-    url: require("@/assets/MasnaMaskaZuto.png"),
+    url: require("@/assets/masnaserumOl.png"),
     cardtitle: "Olival",
-    cardtext: "  Aktivna maska - smilje, 75 ml",
+    cardtext: "Vitaminski serum c+ za čišćenje za masnog lica ",
   },
 ];
 
@@ -66,7 +66,7 @@ export default {
 </script>
 
 <style scoped>
-.maskezaliceM {
+.serumigeloviM {
   background-color: #e1b8b8;
   display: flex;
   flex-direction: column;

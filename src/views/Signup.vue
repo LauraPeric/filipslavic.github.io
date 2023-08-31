@@ -6,11 +6,11 @@
       <h2 class="registration-title">Registriraj se</h2>
       <form @submit.prevent="register">
         <div v-if="errorMessage" class="alert alert-danger">
-          <strong>Ups!</strong>
+          <strong>pogreška! </strong>
           {{ errorMessage }}
         </div>
         <div class="form-group">
-          <label for="email<">Upišite email</label>
+          <label for="email">Upišite email</label>
           <input
             v-model="username"
             type="email"
@@ -19,10 +19,10 @@
             aria-describedby="emailhelp"
             placeholder="upišite email"
           />
+          <small id="emailhelp" class="form-text text-muted">
+            Nikada nećemo dijeliti vaš email s trećim strankama
+          </small>
         </div>
-        <small id="emailhelp" class="form-text text-muted">
-          Nikada nećemo dijeliti vaš email s trećim strankama
-        </small>
         <div class="form-group">
           <label for="password">Upišite lozinku </label>
           <input
@@ -32,10 +32,10 @@
             class="form-control"
             placeholder="upišite lozinku"
           />
+          <small class="form-text text-muted">
+            Lozinka mora sadržavati minimalno 6 znakova
+          </small>
         </div>
-        <small class="form-text text-muted">
-          Lozinka mora sadržavati minimalno 6 znakova
-        </small>
         <div class="form-group">
           <label for="passwordrepeat">Potvrdite lozinku</label>
           <input
@@ -45,6 +45,9 @@
             class="form-control"
             placeholder="ponovite lozinku"
           />
+          <div v-if="passwordMismatch" class="text-danger">
+            Lozinke se ne podudaraju!
+          </div>
         </div>
         <button type="button" @click="signup" class="btn btn-primary">
           Registriraj se
@@ -58,9 +61,9 @@
     </div>
   </div>
 </template>
+
 <script>
 import { firebase } from "@/firebase";
-
 export default {
   name: "Signup",
   data() {
@@ -69,15 +72,24 @@ export default {
       username: "",
       password: "",
       passwordrepeat: "",
+      passwordMismatch: false,
     };
   },
   methods: {
     signup() {
+      if (this.password !== this.passwordrepeat) {
+        this.passwordMismatch = true;
+        return; // staje ako registracija nije tocna
+      } else {
+        this.passwordMismatch = false;
+      }
+
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.username, this.password)
         .then(() => {
           console.log("Uspješna registracija");
+          this.$router.push("/");
         })
         .catch((error) => {
           console.error("Došlo je do greške", error);
@@ -89,8 +101,15 @@ export default {
 </script>
 
 <style scoped>
+.text-danger {
+  margin-top: 2%;
+  font-weight: bold;
+}
 .form-control {
   width: 100%;
+}
+.form-group {
+  margin-bottom: 2%;
 }
 .registration-page {
   background-color: #e1b8b8;

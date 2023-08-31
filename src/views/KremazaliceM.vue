@@ -2,61 +2,68 @@
   <div class="maskezaliceM">
     <h1 class="title">Kreme za lice - Masna koža</h1>
 
-    <!-- Prvi red proizvoda -->
-    <div class="product-row">
-      <router-link to="/DR" class="product-item clickable">
-        <img
-          src="@/assets/masnakremaDR.png"
-          alt="Proizvod 1"
-          class="product-image"
+    <div class="row">
+      <div class="col 6">
+        <item-card-vue
+          v-for="card in filtercards"
+          :key="card.url"
+          :info="card"
         />
-        <div class="product-text">
-          Dr. Hauschkla <br />
-          krema za čišćenje
-        </div>
-      </router-link>
-      <div class="product-item clickable">
-        <img
-          src="@/assets/MasnaMaskaNiv.png"
-          alt="Proizvod 2"
-          class="product-image"
-        />
-        <div class="product-text">
-          NIVEA<br />
-          Osvježavajuća maska za lice u maramici Good Morning Fresh, 15 ml
-        </div>
       </div>
     </div>
-
-    <!-- Drugi red proizvoda -->
-    <div class="product-row">
-      <div class="product-item clickable">
-        <img
-          src="@/assets/MasnaMaskaGli.png"
-          alt="Proizvod 3"
-          class="product-image"
-        />
-        <div class="product-text">
-          biofarm <br />
-          100% RAW glina s Mrtvog mora, 70 g
-        </div>
-      </div>
-      <div class="product-item clickable">
-        <img
-          src="@/assets/MasnaMaskaZuto.png"
-          alt="Proizvod 4"
-          class="product-image"
-        />
-        <div class="product-text">
-          OLIVAL <br />
-          Aktivna maska - smilje, 75 ml
-        </div>
-      </div>
-    </div>
-
-    <router-link to="/masnakoza" class="btn-back">Nazad</router-link>
+    <router-link to="/masnakoza" class="btn btn-primary">Nazad</router-link>
   </div>
 </template>
+
+<script>
+import ItemCardVue from "@/components/ItemCard.vue";
+import store from "@/store";
+
+let cards = [
+  {
+    url: require("@/assets/masnakremaDR.png"),
+    cardtitle: " Dr. Hauschkla",
+    cardtext: "Bio krema za čišćenje lica masne kože",
+    route: "/DR",
+  },
+  {
+    url: require("@/assets/MasnakremaOLIVAL.png"),
+    cardtitle: "Olival",
+    cardtext: "Crna krema za čišćenje za masnog lica",
+  },
+  {
+    url: require("@/assets/MasnakremaMISH.png"),
+    cardtitle: "Misha",
+    cardtext: "Krema za višenamjenjsku upotrebu masne kože",
+  },
+  {
+    url: require("@/assets/masnakremaOLIVALMED.png"),
+    cardtitle: "Olival",
+    cardtext: "Bio krema za čišćenje za masnog lica ",
+  },
+];
+
+export default {
+  name: "MaskeM",
+  data: function () {
+    return {
+      cards,
+      store,
+    };
+  },
+  computed: {
+    filtercards() {
+      //logika koja filtrira cards
+      let termin = this.store.searchterm;
+      console.log("search termin:", termin);
+      return this.cards.filter((card) => card.cardtitle.includes(termin));
+    },
+  },
+  components: {
+    ItemCardVue,
+  },
+};
+</script>
 
 <style scoped>
 .maskezaliceM {
@@ -64,59 +71,46 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  min-height: 100vh;
+  width: 100vw;
+}
+
+.row {
+  width: 50%;
+  margin-left: 11.5%;
+  margin-bottom: 4%;
 }
 
 .title {
-  font-size: 24px;
-  margin-bottom: 6%;
-  margin-top: 6%;
+  font-size: 34px;
+  margin-top: 4%;
+  margin-bottom: 3%;
 }
 
-.product-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10%; /* razmak redova proizvoda */
+.card {
+  width: 80%;
+  margin-bottom: 10px;
+  margin-left: 9%;
+  border-color: #f9dada;
 }
-
-.product-item {
+.card-body {
   background-color: #f9dada;
-  padding: 10px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  width: 40%; /* pola širine s malim razmakom */
-  margin-bottom: 10px; /* razmak između redova proizvoda */
+  padding: 20px;
 }
 
 .clickable {
   cursor: pointer;
 }
 
-.product-image {
-  width: 80px;
-  height: 80px;
-  margin-right: 10px;
-}
-
-.product-text {
-  color: #2c3e50;
-  font-size: 14px;
-  text-align: left;
-}
-
-.btn-back {
+.btn-primary {
   background-color: purple;
-  color: white;
-  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  margin-top: 20px;
+  padding: 10px 20px;
+  margin-top: -3%;
+  margin-bottom: 2%;
 }
 
-.btn-back:hover {
+.btn-primary:hover {
   background-color: rgb(215, 125, 215);
 }
 </style>

@@ -1,22 +1,22 @@
 <template>
   <div class="skin-type-container">
     <div class="opis">
-      <h1 class="opistekst">
-        Dobrodošli u našu interaktivnu platformu posvećenu njezi kože! <br />
-        <br />
-        Sada vam pružamo jednostavan način da pronađete proizvode za njegu lica
-        koji su prilagođeni vašim potrebama. <br />
-        Naša nova značajka vam omogućava da odaberete svoj tip kože među
-        opcijama kao što su masna, suha, osjetljiva, mješovita ili normalna
-        koža. <br />
-        Zašto je odabir pravog tipa kože važan? Svaki tip kože ima svoje
-        jedinstvene karakteristike i potrebe. Odabirom svog tipa kože
-        omogućavate nam da vam preporučimo preparate koji su specifično
-        formulirani za rješavanje izazova s kojima se suočavate. <br />
-        Bez obzira jeste li skloni višku masnoće, dehidraciji, osjetljivosti ili
-        drugim problemima kože, naša široka paleta proizvoda će vam pomoći
-        postići zdrav i blistav ten.
-      </h1>
+      <div class="rectangle">
+        <h1 class="opistekst">
+          Dobrodošli u našu interaktivnu platformu posvećenu njezi kože! <br />
+          <br />
+          Sada vam pružamo jednostavan način da pronađete proizvode za njegu
+          lica koji su prilagođeni vašim potrebama. <br />
+          Naša nova značajka vam omogućava da odaberete svoj tip kože među
+          opcijama kao što su masna, suha, osjetljiva, mješovita ili normalna
+          koža. <br /><br />
+          Zašto je odabir pravog tipa kože važan?<br /><br />
+          Svaki tip kože ima svoje jedinstvene karakteristike i potrebe.
+          Odabirom svog tipa kože omogućavate nam da vam preporučimo preparate
+          koji su specifično formulirani za rješavanje izazova s kojima se
+          suočavate.
+        </h1>
+      </div>
     </div>
     <div class="middle-container">
       <div class="instruction-box">
@@ -29,9 +29,15 @@
         <router-link to="/suhakoza" class="skin-type-option"
           >Suha koža</router-link
         >
-        <div class="skin-type-option">Osjetljiva koža</div>
-        <div class="skin-type-option">Mješovita koža</div>
-        <div class="skin-type-option">Normalna koža</div>
+        <div class="skin-type-option" title="Trenutno nedostupno! :/">
+          Osjetljiva koža
+        </div>
+        <div class="skin-type-option" title="Trenutno nedostupno! :/">
+          Mješovita koža
+        </div>
+        <div class="skin-type-option" title="Trenutno nedostupno! :/">
+          Normalna koža
+        </div>
       </div>
     </div>
     <div class="button-container">
@@ -40,13 +46,19 @@
   </div>
 </template>
 
+
 <style lang="scss">
+.skin-type-option[title="Trenutno nedostupno! :/"] {
+  cursor: not-allowed;
+  color: #777;
+}
+
 .btn-primary {
   background-color: purple;
   border: none;
   cursor: pointer;
   padding: 10px 20px;
-  margin: 150px;
+  margin: 70px;
 }
 
 .btn-primary:hover {
@@ -61,13 +73,21 @@
   height: 100vh;
   width: 100vw;
 }
-
+a {
+  text-decoration: none;
+}
 .opistekst {
-  text-align: justify;
-  margin: 50px; /* razmak ispod teksta */
-  padding: 50px;
-  font-family: "Franklin Gothic Medium";
+  text-align: start;
+  margin: 50px;
+  padding: 20px;
   font-size: 20px;
+}
+
+.rectangle {
+  background-color: #f9dada;
+  border-radius: 10px;
+  width: 80%;
+  margin-left: 10%;
 }
 
 .middle-container {
@@ -80,14 +100,13 @@
 
 .instruction-box {
   background-color: #8e8e8e;
-  padding: 15px;
   border-radius: 10px;
   width: 20%;
-  height: 30%;
+  height: 20%;
+  padding-top: 13px;
   margin-right: 5%;
   margin-left: 20%;
-  margin-bottom: 11.3%;
-  text-align: left;
+  font-size: 18px;
 }
 
 .skin-type-menu {
@@ -110,6 +129,6 @@
 }
 
 .skin-type-option:hover {
-  background-color: #f0f0f0;
+  background-color: #f091f4;
 }
 </style>
