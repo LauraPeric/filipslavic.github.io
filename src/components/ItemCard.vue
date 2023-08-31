@@ -8,7 +8,15 @@
             <div class="media-body">
               <h5 class="cardtitle">{{ info.cardtitle }}</h5>
               <p class="cardtext">{{ info.cardtext }}</p>
-              <a href="#" class="btn btn-primary">Pogledaj</a>
+              <router-link
+                :to="info.route"
+                v-if="info.route && info.route !== ''"
+                class="btn btn-primary"
+                >Pogledaj</router-link
+              >
+              <button v-else disabled class="btn btn-primary">
+                Trenutno nedostupno
+              </button>
             </div>
           </div>
         </div>
@@ -19,6 +27,7 @@
 
 
 <script>
+import { computed } from "vue";
 export default {
   props: ["info"],
   name: "ItemCard",
@@ -28,7 +37,10 @@ export default {
 <style scoped>
 .image {
   padding-bottom: 2%;
+  width: 60%;
+  height: 20%;
 }
+
 .cardtitle {
   padding-top: 4%;
 }
