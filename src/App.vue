@@ -22,9 +22,7 @@
             <router-link to="/registracijaKiliA">Pridruži se</router-link>|
             <router-link to="/forum">Forum</router-link> |
             <router-link to="/info">Informacije</router-link> |
-            <li>
-              <a href="#" @click.prevent="logout()" class="nav-links">Odjava</a>
-            </li>
+            <a href="#" @click.prevent="logout()" class="nav-links">Odjava</a>
           </div>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -38,34 +36,47 @@
         </form>
       </div>
     </nav>
-
     <router-view />
-    <MDBFooter
-      bg="none"
-      :text="['center', 'white']"
-      style="background-color: #8e8e8e; width: 100%"
-    >
-      <MDBContainer class="p-4 pb-0">
-        <!-- Section: CTA -->
-        <section class="">
-          <p class="d-flex justify-content-center align-items-center">
-            <span class="me-3">Registrirajte se besplatno!</span>
-            <MDBBtn outline="light" rounded> Prijavite se! </MDBBtn>
-          </p>
-        </section>
-        <!-- Section: CTA -->
-      </MDBContainer>
-      <!-- Grid container -->
-      <!-- Copyright -->
-      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-        © 2020 Copyright:
-        <a class="text-white" href="https://mdbootstrap.com/"
-          >MDBootstrap.com</a
-        >
+    <footer class="footer">
+      <div class="container p-4">
+        <div class="row">
+          <div class="col-lg-6 col-md-12 mb-4">
+            <h5 class="mb-3 text-dark">O nama</h5>
+            <p>
+              Facial Care Me je vaša destinacija za pravilnu njegu kože.
+              Istražite tipove kože, raznolike proizvode i dijelite savjete na
+              našem forumu. Kontaktirajte nas za dodatne informacije i obavezno
+              ostavite svoje recenzije proizvoda kako bismo zajedno stvorili
+              bolju rutinu njege kože.
+            </p>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h5 class="mb-3 text-dark">Linkovi</h5>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-1">
+                <router-link to="/info" href="#!" style="color: #4f4f4f"
+                  >Informacije</router-link
+                >
+              </li>
+              <li class="mb-1">
+                <router-link to="/odabirtipak" href="#!" style="color: #4f4f4f"
+                  >Tipovi kože</router-link
+                >
+              </li>
+              <li class="mb-1">
+                <router-link to="forum" href="#!" style="color: #4f4f4f"
+                  >Forum</router-link
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <!-- Copyright -->
-    </MDBFooter>
-    <!-- Footer -->
+      <div class="text-center p-3" style="background-color: ">
+        © 2020 Copyright:
+        <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -81,7 +92,7 @@ firebase.auth().onAuthStateChanged((user) => {
     //korisnik je ulogiran
     console.log("korisnik je ulogiran:", user.email);
     store.currentUser = user.email;
-    if (currentRoute && currentRoute.meta && currentRoute.meta.needsUser) {
+    if (currentRoute && currentRoute.meta && !currentRoute.meta.needsUser) {
       router.push({ name: "home" });
     }
   } else {
@@ -116,12 +127,12 @@ export default {
 
 
 <style lang="scss">
-.mdb-footer {
+.col-lg-3 {
+  margin-left: 15%;
+}
+.footer {
+  background-color: #f7d1d1;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 .navbar-nav {
   margin-left: 2%;
@@ -152,6 +163,10 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.router-link {
+  text-decoration: none;
 }
 
 /* Stil za navigaciju, logo i ostalo */
