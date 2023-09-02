@@ -12,7 +12,9 @@ Projekt je kreiran kao sastavni dio nastave predmeta Programsko inženjerstvo na
 Nastao je tijekom akademske godine 2022./2023.
 
 Fakultet informatike u Puli https://fipu.unipu.hr/
+
 Kolegij: Programsko inženjerstvo ntankovic.unipu.hr/pi
+
 Mentor: doc. dr. sc. Nikola Tanković https://fipu.unipu.hr/fipu/nikola.tankovic 
 
 
